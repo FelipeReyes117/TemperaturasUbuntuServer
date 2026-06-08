@@ -31,22 +31,22 @@ include("conexion.php");
             <tbody>
             <?php
                 // Traemos ubicaciones junto con su temperatura más reciente
-                $query = "
-                    SELECT
-                        u.idubicaciones,
-                        u.ubucaciones,
-                        t.temperaturas   AS ultima_temp,
-                        t.temperaturasfecha AS ultima_fecha
-                    FROM ubicaciones u
-                    LEFT JOIN temperaturas t
-                        ON t.idtemperaturas = (
-                            SELECT idtemperaturas
-                            FROM temperaturas
-                            WHERE ubicaciones_idubicaciones = u.idubicaciones
-                            ORDER BY temperaturasfecha DESC
-                            LIMIT 1
-                        )
-                    ORDER BY u.idubicaciones ASC
+                        $query = "
+                SELECT
+                    u.idlugar,
+                    u.lugnombre,
+                    t.temptemperatura   AS ultima_temp,
+                    t.tempfechahora     AS ultima_fecha
+                FROM lugar u
+                LEFT JOIN temperatura t
+                    ON t.idtemperatura = (
+                        SELECT idtemperatura
+                        FROM temperatura
+                        WHERE lugar_idlugar = u.idlugar
+                        ORDER BY tempfechahora DESC
+                        LIMIT 1
+                    )
+                ORDER BY u.idlugar ASC
                 ";
                 $resultado = mysqli_query($conexion, $query);
 
@@ -56,8 +56,8 @@ include("conexion.php");
 
                 if (mysqli_num_rows($resultado) > 0) {
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $id        = $fila['idubicaciones'];
-                        $ubicacion = htmlspecialchars($fila['ubucaciones']);
+                        $id        = $fila['idlugar'];
+                        $ubicacion = htmlspecialchars($fila['lugnombre']);
                         $temp      = $fila['ultima_temp'] !== null
                                         ? htmlspecialchars($fila['ultima_temp']) . ' °C'
                                         : '<em style="color:#aaa;">Sin registros</em>';
@@ -65,7 +65,7 @@ include("conexion.php");
                                         ? htmlspecialchars($fila['ultima_fecha'])
                                         : '—';
 
-                        echo "<tr onclick=\"seleccionarFila(this, $id)\" style=\"cursor:pointer\">";
+                        echo "<tr onclick=\"seleccionarFila(this, $id)\" Hola>";
                         echo "<td>$id</td>";
                         echo "<td>$ubicacion</td>";
                         echo "<td>$temp</td>";
@@ -92,7 +92,7 @@ include("conexion.php");
             </thead>
             <tbody>
             <?php
-                $query2 = "SELECT idubicaciones, ubucaciones FROM ubicaciones ORDER BY idubicaciones ASC";
+                $query2 = "SELECT idlugar, lugnombre FROM lugar ORDER BY idlugar ASC";
                 $resultado2 = mysqli_query($conexion, $query2);
 
                 if (!$resultado2) {
@@ -101,8 +101,8 @@ include("conexion.php");
 
                 if (mysqli_num_rows($resultado2) > 0) {
                     while ($fila2 = mysqli_fetch_assoc($resultado2)) {
-                        $id2  = $fila2['idubicaciones'];
-                        $nom2 = htmlspecialchars($fila2['ubucaciones']);
+                        $id2  = $fila2['idlugar'];
+                        $nom2 = htmlspecialchars($fila2['lugnombre']);
 
                         echo "<tr onclick=\"seleccionarFila(this, $id2)\" style=\"cursor:pointer\">";
                         echo "<td>$id2</td>";
@@ -155,7 +155,7 @@ include("conexion.php");
             alert('Por favor, selecciona una ubicación de la tabla primero.');
             return false;
         }
-        window.location.href = 'grafica.php?id=' + idSeleccionado;
+        window.location.href = 'Grafica.php?id=' + idSeleccionado;
         return false;
     }
 </script>

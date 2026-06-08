@@ -12,13 +12,13 @@ $idUbicacion = intval($_GET['id']);
 // Traemos todas las temperaturas de la ubicación seleccionada
 $query = "
     SELECT
-        t.temperaturasfecha,
-        t.temperaturas,
-        u.ubucaciones AS Ubicacion
-    FROM temperaturas t
-    JOIN ubicaciones u ON t.ubicaciones_idubicaciones = u.idubicaciones
-    WHERE t.ubicaciones_idubicaciones = $idUbicacion
-    ORDER BY t.temperaturasfecha ASC
+        t.tempfechahora,
+        t.temptemperatura,
+        l.lugnombre AS Ubicacion
+    FROM temperatura t
+    JOIN lugar l ON t.lugar_idlugar = l.idlugar
+    WHERE t.lugar_idlugar = $idUbicacion
+    ORDER BY t.tempfechahora ASC
 ";
 $resultado = mysqli_query($conexion, $query);
 
@@ -27,17 +27,17 @@ if (!$resultado) {
 }
 
 // Nombre de la ubicación
-$queryNombre = "SELECT ubucaciones FROM ubicaciones WHERE idubicaciones = $idUbicacion";
+$queryNombre = "SELECT lugnombre FROM lugar WHERE idlugar = $idUbicacion";
 $resNombre   = mysqli_query($conexion, $queryNombre);
 $filaNombre  = mysqli_fetch_assoc($resNombre);
-$nombreUbicacion = $filaNombre ? $filaNombre['ubucaciones'] : "Ubicación desconocida";
+$nombreUbicacion = $filaNombre ? $filaNombre['lugnombre'] : "Ubicación desconocida";
 
 // Construimos los arreglos para Chart.js
 $etiquetas    = [];
 $temperaturas = [];
 while ($fila = mysqli_fetch_assoc($resultado)) {
-    $etiquetas[]    = $fila['temperaturasfecha'];
-    $temperaturas[] = $fila['temperaturas'];
+    $etiquetas[]    = $fila['tempfechahora'];
+    $temperaturas[] = $fila['temptemperatura'];
 }
 
 $etiquetas_json    = json_encode($etiquetas);

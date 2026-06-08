@@ -26,9 +26,9 @@ if (!filter_var($cor, FILTER_VALIDATE_EMAIL)) {
 }
 //COnfi red
 $host    = 'localhost';
-$db      = 'temperaturaejem';
-$user    = 'root';
-$pass    = '';
+$db      = 'user23060301';
+$user    = 'user23060301';
+$pass    = 'pekaelectrico';
 $charset = 'utf8mb4';  // [11] utf8mb4 soporta emojis y todos los Unicode
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
@@ -39,14 +39,14 @@ $options = [
 ];
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    $stmt = $pdo->prepare("SELECT Nombre FROM usuarios WHERE Email = ?");
+    $stmt = $pdo->prepare("SELECT nombre FROM usuarios WHERE email = ?");
     $stmt->execute([$cor]);
     if ($row = $stmt->fetch()) {
-        responder('warn', "El correo ya está registrado a nombre de: {$row['Nombre']}");
+        responder('warn', "El correo ya está registrado a nombre de: {$row['nombre']}");
     }
 
     $passGenerado = bin2hex(random_bytes(16));
-    $sql  = "INSERT INTO usuarios (Email, Password, Nombre) VALUES (?, ?, ?)";
+    $sql  = "INSERT INTO usuarios (email, password, nombre) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$cor, $passGenerado, $nom]);
 

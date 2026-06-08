@@ -20,9 +20,9 @@ $fecha = date("Y-m-d H:i:s");
 
 // ── Conexión PDO ─────────────────────────────────────────────
 $host    = 'localhost';
-$db      = 'temperaturaejem';
-$user    = 'root';
-$pass    = '';
+$db      = 'user23060301';
+$user    = 'user23060301';
+$pass    = 'pekaelectrico';
 $charset = 'utf8mb4';
 
 $dsn     = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -34,10 +34,10 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
-  
+    
     $stmtAuth = $pdo->prepare("
-        SELECT Id FROM usuarios
-        WHERE Email = ? AND Password = ?
+        SELECT id FROM usuarios
+        WHERE email = ? AND password = ?
         LIMIT 1
     ");
     $stmtAuth->execute([$cor, $passw]);
@@ -52,8 +52,8 @@ try {
 
     // Verificar que la ubicación existe
     $stmtUbi = $pdo->prepare("
-        SELECT idubicaciones FROM ubicaciones
-        WHERE idubicaciones = ?
+        SELECT idlugar FROM lugar
+        WHERE idlugar = ?
         LIMIT 1
     ");
     $stmtUbi->execute([$Ubi]);
@@ -68,7 +68,7 @@ try {
 
     // Insertar la temperatura
     $stmtInsert = $pdo->prepare("
-        INSERT INTO temperaturas (temperaturas, temperaturasfecha, ubicaciones_idubicaciones)
+        INSERT INTO temperatura (temptemperatura, tempfechahora, lugar_idlugar)
         VALUES (?, ?, ?)
     ");
     $stmtInsert->execute([$temp, $fecha, $Ubi]);
