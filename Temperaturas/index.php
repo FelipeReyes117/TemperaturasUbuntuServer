@@ -65,7 +65,7 @@ include("conexion.php");
                                         ? htmlspecialchars($fila['ultima_fecha'])
                                         : '—';
 
-                        echo "<tr onclick=\"seleccionarFila(this, $id)\" Hola>";
+                        echo "<tr onclick=\"seleccionarFila(this, $id)\" style=\"cursor:pointer\">";
                         echo "<td>$id</td>";
                         echo "<td>$ubicacion</td>";
                         echo "<td>$temp</td>";
