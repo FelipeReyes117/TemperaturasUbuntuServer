@@ -26,7 +26,7 @@ if (!filter_var($cor, FILTER_VALIDATE_EMAIL)) {
 }
 //COnfi red
 $host    = 'localhost';
-$db      = 'user23060301';
+$db      = 'temperaturas23060301';
 $user    = 'user23060301';
 $pass    = 'pekaelectrico';
 $charset = 'utf8mb4';  // [11] utf8mb4 soporta emojis y todos los Unicode

@@ -20,7 +20,7 @@ $fecha = date("Y-m-d H:i:s");
 
 // ── Conexión PDO ─────────────────────────────────────────────
 $host    = 'localhost';
-$db      = 'temperatura23060301';
+$db      = 'temperaturas23060301';
 $user    = 'user23060301';
 $pass    = 'pekaelectrico';
 $charset = 'utf8mb4';
