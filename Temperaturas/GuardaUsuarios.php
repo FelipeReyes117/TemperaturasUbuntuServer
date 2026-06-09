@@ -28,7 +28,7 @@ if (!filter_var($cor, FILTER_VALIDATE_EMAIL)) {
 $host    = 'localhost';
 $db      = 'temperaturas23060301';
 $user    = 'user23060301';
-$pass    = 'pekaelectrico';
+$pass    = 'Pekaelectrico_117';
 $charset = 'utf8mb4';  // [11] utf8mb4 soporta emojis y todos los Unicode
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 

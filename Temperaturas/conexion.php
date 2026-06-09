@@ -1,8 +1,8 @@
 <?php
 define('DB_HOST',     'localhost');
 define('DB_USER',     'user23060301');
-define('DB_PASSWORD', 'pekaelectrico');
-define('DB_NAME',     'user23060301');
+define('DB_PASSWORD', 'Pekaelectrico_117');
+define('DB_NAME',     'temperaturas23060301');
 define('DB_CHARSET',  'utf8mb4');
 
 function getConexion(): mysqli {

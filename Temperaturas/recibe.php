@@ -22,7 +22,7 @@ $fecha = date("Y-m-d H:i:s");
 $host    = 'localhost';
 $db      = 'temperaturas23060301';
 $user    = 'user23060301';
-$pass    = 'pekaelectrico';
+$pass    = 'Pekaelectrico_117';
 $charset = 'utf8mb4';
 
 $dsn     = "mysql:host=$host;dbname=$db;charset=$charset";
